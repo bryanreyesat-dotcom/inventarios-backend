@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const TipoEquipoSchema = new mongoose.Schema({
     nombre: { type: String, required: true },
-    estado: { type, String, required: true, enum: ["Active", "inactivo"] },
+    estado: { type: String, required: true, enum: ["Active", "inactivo"] },
     fechaCreacion: { type: Date, default: new Date() },
     fechaActualizacion: { type: Date, default: new Date() },
 });
