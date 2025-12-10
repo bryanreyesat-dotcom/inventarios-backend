@@ -1,10 +1,7 @@
 const express = require('express');
 const { getConnection } = require('./db/db-connection-mongo');
 const cors = require('cors');
-const path = require('path'); // 1. Importar módulo path
-
-// 2. Configurar dotenv apuntando a la misma carpeta (__dirname)
-require('dotenv').config({ path: path.resolve(__dirname, '.env') });
+require('dotenv').config(); // <-- VOLVEMOS A LO SIMPLE (Busca en la raíz automáticamente)
 
 const app = express();
 const port = process.env.PORT || 4000;
