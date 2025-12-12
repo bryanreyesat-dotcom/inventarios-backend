@@ -7,11 +7,12 @@ const crearTipoEquipo = async (req, res) => {
         tipoEquipo.estado = req.body.estado;
         tipoEquipo.fechaCreacion = new Date();
         tipoEquipo.fechaActualizacion = new Date();
+
         tipoEquipo = await tipoEquipo.save();
-        res.send(tipoEquipo);
+        res.status(201).json(tipoEquipo); // Usamos json explícito
     } catch (error) {
-        console.log(error);
-        res.status(500).send('Ocurrió un error');
+        console.log("❌ Error en crearTipoEquipo:", error); // Esto saldrá en la consola del servidor
+        res.status(500).json({ msj: 'Error al crear tipo', error: error.message });
     }
 }
 
@@ -21,7 +22,7 @@ const listarTipoEquipos = async (req, res) => {
         res.json(tipos);
     } catch (error) {
         console.log(error);
-        res.status(500).send('Ocurrió un error');
+        res.status(500).json({ msj: 'Error al listar tipos', error: error.message });
     }
 }
 
@@ -29,17 +30,17 @@ const editarTipoEquipo = async (req, res) => {
     try {
         const { id } = req.params;
         let tipoEquipo = await TipoEquipo.findById(id);
-        if (!tipoEquipo) return res.status(404).send('Tipo de equipo no existe');
+        if (!tipoEquipo) return res.status(404).json({ msj: 'Tipo no existe' });
 
         tipoEquipo.nombre = req.body.nombre;
         tipoEquipo.estado = req.body.estado;
         tipoEquipo.fechaActualizacion = new Date();
 
         tipoEquipo = await tipoEquipo.save();
-        res.send(tipoEquipo);
+        res.json(tipoEquipo);
     } catch (error) {
         console.log(error);
-        res.status(500).send('Ocurrió un error');
+        res.status(500).json({ msj: 'Error al editar', error: error.message });
     }
 }
 
