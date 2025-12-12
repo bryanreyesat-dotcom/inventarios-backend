@@ -8,7 +8,9 @@ const port = process.env.PORT || 4000;
 
 // --- Middlewares ---
 app.use(cors()); // Permite peticiones desde otros orígenes (Frontend)
-app.use(express.json()); // Habilita recibir datos en formato JSON
+app.use(express.json());
+app.use('/auth', require('./routes/auth-route')); // <--- NUEVA RUTA DE LOGIN
+app.use('/usuarios', require('./routes/usuario-route')); // Habilita recibir datos en formato JSON
 
 // --- Conexión a Base de Datos ---
 getConnection();
